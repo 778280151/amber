@@ -10,7 +10,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").
-                excludePathPatterns("/pages/Amberhtml/index.html");//PathPatterns为过滤的url路径,xcludePathPatterns不拦截的url路径多个路径用逗号隔开
+                excludePathPatterns("/pages/Amberhtml/login.html","classpath:/static/"  );//PathPatterns为过滤的url路径,excludePathPatterns不拦截的url路径多个路径用逗号隔开
         super.addInterceptors(registry);
     }
 }
