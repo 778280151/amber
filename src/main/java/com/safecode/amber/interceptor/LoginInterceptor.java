@@ -1,21 +1,26 @@
 package com.safecode.amber.interceptor;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@Component
 public class LoginInterceptor implements HandlerInterceptor {
+
+    LoginInterceptor kk() {
+        return new LoginInterceptor();
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println("Interceptor1 start work");
-        if(request.getRequestURI().equals("/error")){
+        System.out.println("ddddd" + request.getRequestURI());
+        if (request.getRequestURI().equals("/error")) {
             response.sendRedirect("/pages/Amberhtml/login.html");
-        return  false;
+            return false;
         }
         return true;
     }

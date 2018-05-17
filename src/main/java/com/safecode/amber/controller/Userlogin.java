@@ -23,7 +23,7 @@ public class Userlogin {
 
     @RequestMapping(value = "/login")
     public ModelAndView login() {
-        ModelAndView m = new ModelAndView("/Amberhtml/index");
+        ModelAndView m = new ModelAndView("/Amberhtml/Tos");
         List<users> users = k.selectByExample(null);
         System.out.println(users.get(0).toString());
         System.out.println("index");
