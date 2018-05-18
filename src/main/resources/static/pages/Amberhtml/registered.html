@@ -256,41 +256,44 @@
 
 <script>
     $(document).ready(function(){
-        function register(){
-			
-			document.getElementById("tos").disabled = true; 
-			
+        function register() {
+
+
+            document.getElementById("tos").disabled = true;
+
             $.ajax({
-                type:"POST",
-                url:"/user/registered",
-                dataType:"json",
-                data:{
+                type: "POST",
+                url: "/user/registered",
+                dataType: "json",
+                data: {
                     uEmail: $("#email").val(),
                     uUsername: $("#name").val(),
                     uPwd: $("#passwd").val(),
                     repasswd: $("#repasswd").val(),
-					wechat: $("#wechat").val(),
-					imtype: $("#imtype").val(),
-					code: $("#code").val()                },
-                success:function(data){
-                    if(data.ret == 1){
+                    wechat: $("#wechat").val(),
+                    imtype: $("#imtype").val(),
+                    code: $("#code").val()
+                },
+                success: function (data) {
+                    if (data.ret == 1) {
                         $("#result").modal();
                         $("#msg").html(data.msg);
                         window.setTimeout("location.href='/pages/Amberhtml/login.html'", 1800);
-                    }else{
+                    } else {
                         $("#result").modal();
                         $("#msg").html(data.msg);
-			document.getElementById("tos").disabled = false; 
+                        document.getElementById("tos").disabled = false;
 
-			                    }
+                    }
                 },
-                error:function(jqXHR){
-			$("#msg-error").hide(10);
-			$("#msg-error").show(100);
-			$("#msg-error-p").html("发生错误："+jqXHR.status);
-			document.getElementById("tos").disabled = false; 
-			                }
+                error: function (jqXHR) {
+                    $("#msg-error").hide(10);
+                    $("#msg-error").show(100);
+                    $("#msg-error-p").html("发生错误：" + jqXHR.status);
+                    document.getElementById("tos").disabled = false;
+                }
             });
+
         }
         $("html").keydown(function(event){
             if(event.keyCode==13){
@@ -300,7 +303,12 @@
 		
 				
 		$("#reg").click(function(){
-            register();
+            var pwd=$("#passwd").val();
+            var rpwd=$("#repasswd").val();
+            var code=$("#code").val();
+            if (jiaoyanall(pwd,rpwd,code)){
+                register();
+            }
         });
 		
 		$("#tos").click(function(){

@@ -17,3 +17,25 @@ function emailjiaoyan(obj) { //邮箱正则校验
         return true;
     }
 }
+
+function jiaoyanall(pwd,rpwd,code) {
+    alert(pwd+rpwd+code);
+    if (pwd.length>0 && rpwd.length>0 && code.length>0) {
+        if (pwd == rpwd) {
+            if(pwd.length>=6&&pwd.length<=15){
+                alert("验证成功");
+                return true;
+            }else {
+                alert("请设置6-15位长度密码");
+                return false;
+            }
+        } else {
+            alert("密码不一致，请重新填写");
+            return false;
+        }
+    } else {
+        alert("请填写完整信息");
+        return false;
+    }
+
+}
