@@ -16,7 +16,7 @@ public class hello_config {
     private Bus bus;
 
     @Bean
-    public   hello   userService() {
+    public hello userService() {
         return new helloipl();
     }
 

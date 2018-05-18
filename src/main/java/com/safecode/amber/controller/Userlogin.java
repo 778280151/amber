@@ -8,26 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
 public class Userlogin {
     @Autowired
-    usersMapper k;
+    usersMapper kf;
     @Autowired
     private JavaMailSender sender;
     private String s1;
 
     @RequestMapping(value = "/login")
-    public ModelAndView login() {
-        ModelAndView m = new ModelAndView("/Amberhtml/Tos");
-        List<users> users = k.selectByExample(null);
-        System.out.println(users.get(0).toString());
-        System.out.println("index");
-        return m;
+    public Map login(String email, String passwd, HttpSession session) {
+        System.out.println("email帐号:" + email + "   " + "密码" + passwd);
+        Map k = new HashMap();
+        if (email.length() > 0 && passwd.length() > 0) {
+            List<users> users = kf.selectByExample(null);
+            System.out.println(users.get(0).toString());
+            System.out.println("index");
+            session.setAttribute("user", email);
+            k.put("ret", "1");
+            k.put("msg", "注册成功啦");
+//            user="zcj";
+            return k;
+        } else {
+            k.put("ret", "2");
+            k.put("msg", "一定是发生了什么");
+            return k;
+        }
+
     }
 
     @RequestMapping(value = "/registered")
@@ -56,8 +72,21 @@ public class Userlogin {
     }
 
     @RequestMapping("/submmit")
-    public void submit() {
+    public ModelAndView submit() {
         System.out.println(s1);
+        ModelAndView m = new ModelAndView("/Amberhtml/index");
+        return m;
+    }
+
+    @RequestMapping("pages")//页面跳转
+    public ModelAndView userloginpages(ModelAndView m, String page, @SessionAttribute(value = "user") String name) {
+        System.out.println("session 哈哈哈名字" + name);
+        if (name != null) {
+            m.setViewName("/Amberhtml/" + page);
+        } else {
+            m.setViewName("/pages/Amberhtml/login.html");
+        }
+        return m;
     }
 
 }

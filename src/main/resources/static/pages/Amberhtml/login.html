@@ -34,10 +34,10 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li>
-							<a class="padding-right-lg waves-attach waves-effect" href="/pages/Amberhtml/login.html"><span class="icon icon-lg margin-right">account_box</span>登录</a>
+							<a class="padding-right-lg waves-attach waves-effect" href="/user/login"><span class="icon icon-lg margin-right">account_box</span>登录</a>
 						</li>
 						<li>
-							<a class="padding-right-lg waves-attach waves-effect" href="/user/registered"><span class="icon icon-lg margin-right">pregnant_woman</span>注册</a>
+							<a class="padding-right-lg waves-attach waves-effect" href="/pages/Amberhtml/registered.html"><span class="icon icon-lg margin-right">pregnant_woman</span>注册</a>
 						</li>
 					</ul>
 									
@@ -61,10 +61,10 @@
 					</li>
 					-->
 										<li>
-						<a href="/pages/Amberhtml/login.html"><i class="icon icon-lg">vpn_key</i>&nbsp;登录</a>
+						<a href="/user/login"><i class="icon icon-lg">vpn_key</i>&nbsp;登录</a>
 					</li>
 					<li>
-						<a href="/user/registered"><i class="icon icon-lg">pregnant_woman</i>&nbsp;注册</a>
+						<a href="/pages/Amberhtml/registered.html"><i class="icon icon-lg">pregnant_woman</i>&nbsp;注册</a>
 					</li>
 									</ul>
 			</div>
@@ -154,7 +154,7 @@
 
 						<div class="clearfix">
 							<p class="margin-no-top pull-left"><a class="btn btn-flat btn-brand waves-attach waves-effect" href="http://tu-z.cn/password/reset">忘记密码</a></p>
-							<p class="margin-no-top pull-right"><a class="btn btn-flat btn-brand waves-attach waves-effect" href="/user/registered">注册个帐号</a></p>
+							<p class="margin-no-top pull-right"><a class="btn btn-flat btn-brand waves-attach waves-effect" href="/pages/Amberhtml/registered.html">注册个帐号</a></p>
 						</div>
 
 
@@ -190,7 +190,7 @@
 	<!-- js -->
 	<script src="js/login/jquery.min.js"></script>
 	<script src="js/login/gt.js"></script>
-	
+
 	<script src="js/login/base.min.js"></script>
 	<script src="js/login/project.min.js"></script>
 
@@ -199,12 +199,11 @@
 <script>
     $(document).ready(function(){
         function login(){
-			
 			document.getElementById("login").disabled = true;
 
             $.ajax({
                 type:"POST",
-                url:"/auth/login",
+                url:"/user/login",
                 dataType:"json",
                 data:{
                     email: $("#email").val(),
@@ -212,17 +211,19 @@
 					code: $("#code").val(),
                     remember_me: $("#remember_me:checked").val()                },
                 success:function(data){
+                    alert("dfsdf");
                     if(data.ret == 1){
 						$("#result").modal();
                         $("#msg").html(data.msg);
-                        window.setTimeout("location.href='/user'", 1800);
+                        window.setTimeout("location.href='/user/pages?page=index'", 1800);
                     }else{
-			$("#result").modal();
+			            $("#result").modal();
                         $("#msg").html(data.msg);
 			document.getElementById("login").disabled = false;
 			                    }
                 },
                 error:function(jqXHR){
+                    alert("错误");
 			$("#msg-error").hide(10);
 			$("#msg-error").show(100);
 			$("#msg-error-p").html("发生错误："+jqXHR.status);
