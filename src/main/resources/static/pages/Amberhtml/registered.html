@@ -262,7 +262,7 @@
 			
             $.ajax({
                 type:"POST",
-                url:"/user/xxx",
+                url:"/user/registered",
                 dataType:"json",
                 data:{
                     uEmail: $("#email").val(),
@@ -276,7 +276,7 @@
                     if(data.ret == 1){
                         $("#result").modal();
                         $("#msg").html(data.msg);
-                        window.setTimeout("location.href='/auth/login'", 1800);
+                        window.setTimeout("location.href='/pages/Amberhtml/login.html'", 1800);
                     }else{
                         $("#result").modal();
                         $("#msg").html(data.msg);
@@ -311,9 +311,12 @@
 
 	<script>
         $("#jiaoyan").click(function () {
-          var kk= registered_jiaoyan();
+          var kk= emailjiaoyan($("#email").val());
            if(kk){
-               $.post("/user/email", { name: $("#email").val()});
+               $.post("/user/email", { name: $("#email").val()},
+			   function (date) {
+				   alert(date);
+               });
 		      return false;
            }
         });

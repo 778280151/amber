@@ -18,8 +18,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println("Interceptor1 start work-访问拦截");
         System.out.println("请求路径是:" + "   " + request.getRequestURI());
-        System.out.println("session的名字"+request.getSession().getAttribute("user"));
-        if (request.getSession().getAttribute("user")== null) {
+        System.out.println("session的名字" + request.getSession().getAttribute("user"));
+        if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/pages/Amberhtml/login.html");
             return false;
         }

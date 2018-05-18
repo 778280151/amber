@@ -1,12 +1,11 @@
-function registered_jiaoyan() {
-    var kk = emailjiaoyan($("#email").val());
-    return kk;
-}
+// function registered_jiaoyan() {
+//     var kk = emailjiaoyan(obj);
+//     return kk;
+// }
 
 
 function emailjiaoyan(obj) { //邮箱正则校验
     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
-    alert(obj.value);
     if (obj == "") { //输入不能为空
         alert("输入不能为空!");
         return false;
